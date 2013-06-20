@@ -6,8 +6,11 @@ class Sentence(models.Model):
     def __unicode__(self):
         return self.user_input
     
+    def words(self):
+        return self.user_input.split()
+    
     def get_words(self):
-        words = self.user_input.split()
+        words = self.words()
         last_w = Word.objects.get(pk=1)
         
         for word in words:
