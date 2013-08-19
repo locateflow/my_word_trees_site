@@ -27,7 +27,7 @@
 <script type="text/processing" data-processing-target="processing-canvas">
 String processingString = "Hello from processing";
 
-oid setup() {
+void setup() {
   printMessage(jsString + " " + processingString);
   text( "words", 50, 50)
   size(200, 200);
@@ -36,10 +36,26 @@ oid setup() {
   ellipse(50, 50, 25, 25);
   println('hello web!');
   text(jsString, 100, 100);
+    text(jsString, 100, 100);
   		{% for w in words %}
 			text("{{ w.user_input }}", random(200), random(200));
 		{% endfor %}
 
 }
+
+void draw() {
+drawWord();	
+	
+}
+
+void drawWord(int id_in, String_in){
+	text("using function", mouseX, mouseY);
+	
+	
+	
+}
+
+
+
 </script>
 <canvas id="processing-canvas"> </canvas>
