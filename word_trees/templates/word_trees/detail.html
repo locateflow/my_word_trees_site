@@ -25,6 +25,7 @@
     </script>
 
 <script type="text/processing" data-processing-target="processing-canvas">
+// find reference at http://processingjs.org/articles/jsQuickStart.html
 String processingString = "Hello from processing";
 
 void setup() {
@@ -44,7 +45,8 @@ void setup() {
 }
 
 void draw() {
-drawWord(5, 'hello');	
+//drawWord(5, 'hello');	
+drawWord(5, "{{ this_word.user_input }}");
 	
 }
 
