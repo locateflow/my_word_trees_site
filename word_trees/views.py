@@ -29,6 +29,7 @@ def detail(request, word_id):
     words = Word.objects.filter(parent_id=word_id)
     all_words = Word.objects.all()
     dict = {}
+    
     for each in all_words:
         dict[each.id] = (each.user_input, each.parent_id)
     template = loader.get_template('word_trees/detail.html')
