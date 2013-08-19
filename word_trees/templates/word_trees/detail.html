@@ -44,12 +44,12 @@ void setup() {
 }
 
 void draw() {
-drawWord();	
+drawWord(5, 'hello');	
 	
 }
 
 void drawWord(int id_in, String_in){
-	text("using function", mouseX, mouseY);
+	text(String_in, mouseX + id_in, mouseY);
 	
 	
 	
