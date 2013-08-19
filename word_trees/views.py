@@ -27,10 +27,16 @@ def index(request):
 def detail(request, word_id):
     this_word = Word.objects.get(id=word_id)
     words = Word.objects.filter(parent_id=word_id)
+    all_words = Word.objects.all()
+    dict = {}
+    for each in all_words:
+        dict[each.id] = (each.user_input, each.parent_id)
     template = loader.get_template('word_trees/detail.html')
     context = Context({
         'this_word': this_word,
         'words': words,
+        'all_words' : all_words,
+        'dict' : dict,
         })
     
     return HttpResponse("this is sentence number %s." % word_id + template.render(context))
