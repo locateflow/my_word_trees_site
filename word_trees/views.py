@@ -5,6 +5,8 @@ from word_trees.models import Sentence, Word
 from django.http import HttpResponse
 from django.template import Context, loader
 
+from django.core import serializers
+
 def index(request):
     list = Sentence.objects.order_by('user_input')[:5]
     output1 = '  '.join([s.user_input for s in list])
@@ -32,13 +34,19 @@ def detail(request, word_id):
     
     for each in all_words:
         dict[each.id] = (each.user_input, each.parent_id)
+        
+    data = serializers.serialize("json", all_words)
+        
     template = loader.get_template('word_trees/detail.html')
+    
     context = Context({
         'this_word': this_word,
         'words': words,
         'all_words' : all_words,
         'dict' : dict,
+        'data' : data,
         })
+    
     
     return HttpResponse("this is sentence number %s." % word_id + template.render(context))
 
@@ -60,4 +68,21 @@ def buildTree(ob):
     
     ####################
     
+from django.views.generic.edit import CreateView
+from word_trees.forms import SentenceForm
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
+def sentence(request):
+    if request.method == 'POST':
+        form = SentenceForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('')
+    else:
+        form = SentenceForm()
+    return render(request, 'word_trees/sentence.html', {
+        'form': form,
+    })
+    
+
       

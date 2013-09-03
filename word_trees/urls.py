@@ -7,6 +7,7 @@ from word_trees import views
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^(?P<word_id>\d+)/$', views.detail, name='detail'),
+    url(r'^sentence/$', views.sentence, name = 'sentence'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

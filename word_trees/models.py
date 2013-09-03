@@ -27,13 +27,18 @@ class Sentence(models.Model):
         
     
 class Word(models.Model):
-    sentence = models.ForeignKey(Sentence)
+    sentence = models.ForeignKey(Sentence, null=True)
     user_input = models.CharField(max_length=50)
 #    parent_id = models.IntegerField(default=0)
-    parent = models.ForeignKey('self', default = 1)
+    parent = models.ForeignKey('self', null=True)
     
 
     def __unicode__(self):
         return self.user_input  
 
-    
+from django.forms import ModelForm
+
+class SentenceForm(ModelForm):
+    class Meta:
+        model = Sentence
+        
