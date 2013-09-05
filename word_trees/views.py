@@ -38,6 +38,8 @@ def detail(request, word_id):
     data = serializers.serialize("json", all_words)
         
     template = loader.get_template('word_trees/detail.html')
+    firstWord = Word.objects.get(pk=3)
+    tree = assembleTree(firstWord, [])
     
     context = Context({
         'this_word': this_word,
@@ -45,10 +47,24 @@ def detail(request, word_id):
         'all_words' : all_words,
         'dict' : dict,
         'data' : data,
+        'tree' : tree,
         })
-    
-    
     return HttpResponse("this is sentence number %s." % word_id + template.render(context))
+
+def assembleTree(firstWord, x):
+    set = firstWord.word_set.all()
+    lenSet = len(set)
+    x.append(firstWord)  
+
+    if lenSet > 0:   
+        for each in set:           
+            assembleTree(each, x)            
+    return x    
+
+
+        
+    
+    
 
 def buildTree(ob):
         output = ''

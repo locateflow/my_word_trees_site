@@ -17,6 +17,14 @@
     <div id="msg">
     </div>
     <script type="application/javascript">
+        var json = '[{"result":true,"count":1}]',
+    	obj2 = JSON.parse(json);
+        //var json2 = '{{ data }}';
+        //obj = JSON.parse(json2);
+        // obj = '{{ data }}'
+        var myJSONtext = "{{ data }}"
+        //var myObject = JSON.parse(myJSONtext);
+        //var myObject = eval('(' + myJSONtext + ')');
         var jsString = "Hello from JavaScript!";
         var jsString = "{{ this_word.user_input }}";
         var printMessage = function (msg) {
@@ -30,38 +38,47 @@ String processingString = "Hello from processing";
 
 void setup() {
   printMessage(jsString + " " + processingString);
-  text( "words", 50, 50)
   size(500, 500);
   background(100);
   stroke(255);
-  ellipse(50, 50, 25, 25);
-  println('hello web!');
-  text(jsString, 100, 100);
-    text(jsString, 100, 100);
-  		{% for w in words %}
+<!--   		{% for w in words %}
 			text("{{ w.user_input }}", random(200), random(200));
-		{% endfor %}
+		{% endfor %} -->
 
 }
+
+//var dat = eval("("+obj+")");
 
 void draw() {
 	background(100)
 //drawWord(5, 'hello');	
-drawWord(5, "{{ this_word.user_input }}");
+//drawWord(2, "{{ this_word.user_input }}");
+drawWord(2, 'this_word.user_input');
+
 {% for each in all_words%}
-pushMatrix();
 translate(width/2, height/2)
+pushMatrix();
+
 rotate(("{{each.id}}"/10)*2*PI+millis()/1000);
-drawWord("{{ each.id }}" * 5, "{{ each.user_input }}");
-popMatrix();
-{% endfor each %}	
+drawWord("{{ each.id }}" * .1, "{{ each.user_input }}");
+//popMatrix();
+//{% endfor each %}	
 }
 
 void drawWord(int id_in, String_in){
-	text(String_in, mouseX + id_in, mouseY + id_in);
-	
-	
-	
+
+//	text(String_in, mouseX + id_in, mouseY + id_in);
+//	eval(text({{ all_words.count }}, mouseX + id_in, mouseY + id_in + 15 ));
+eval('text({{' + String_in + '}}, mouseX + id_in, mouseY + id_in + 15 )');
+
+ //   text({{ String_in.count }}, mouseX + id_in, mouseY + id_in + 30);
+//    text(obj[0], mouseX + id_in, mouseY + id_in + 30 );
+//    x = eval("{{" + String_in + "}}")
+//	text(eval('{{' + String_in + '}}'), mouseX + id_in, mouseY + id_in + 45 );
+
+//	text(obj2[0], mouseX + id_in, mouseY + id_in + 45 );
+//	text(dat[1].fields.user_input, mouseY + id_i + 60)
+//
 }
 
 
