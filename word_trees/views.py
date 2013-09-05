@@ -60,7 +60,7 @@ def detail(request, word_id):
 def assembleTree(firstWord, x):
     set = firstWord.word_set.all()
     lenSet = len(set)
-    x.append(firstWord)  
+    x.append([firstWord, random.random()*2*math.pi])  
 
     if lenSet > 0:   
         for each in set:           

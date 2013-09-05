@@ -53,23 +53,23 @@ void draw() {
 	background(100)
 	text(+"{{ randoms.1 }}"+10, 50, 50);
 	
-i = 0;
-{% for each in all_words%}
-current_word = "{{ each.user_input }}";
-numSiblings = +"{{ each.word_list.all | length }}"
-rand_in = +"{{randoms.i}}"
+translate(width/2, height/2)
 
-drawWord(current_word );
-translate(textWidth(current_word), 0);
-i ++
-text(+"{{ randoms.1 }}"+10, 25+i*50, i*50);
+
+{% for each in tree%}
+current_word = "{{ each.0.user_input }}";
+numSiblings = +"{{ each.0.word_set.all | length }}"
+rand_in = +"{{ each.1 }}"
+rotate((PI/4)/(numSiblings));
+drawWord(current_word, rand_in);
+
+
 {% endfor each %}	
 }
 
-void drawWord(word_in, w, h){
-//	text({{ word_in.user_input }})
-text(word_in, width/2, height/2);
-
+void drawWord(word_in, rand_in){
+	text(word_in, 0, 0);
+    translate(textWidth(current_word), 0);
 
 }
 
