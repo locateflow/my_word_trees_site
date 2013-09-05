@@ -51,34 +51,23 @@ void setup() {
 
 void draw() {
 	background(100)
-//drawWord(5, 'hello');	
-//drawWord(2, "{{ this_word.user_input }}");
+
 drawWord(2, 'this_word.user_input');
 
 {% for each in all_words%}
-translate(width/2, height/2)
-pushMatrix();
 
-rotate(("{{each.id}}"/10)*2*PI+millis()/1000);
-drawWord("{{ each.id }}" * .1, "{{ each.user_input }}");
+
+
+drawWord("{{ each.user_input }}");
 //popMatrix();
 //{% endfor each %}	
 }
 
-void drawWord(int id_in, String_in){
+void drawWord(word_in, w, h){
+//	text({{ word_in.user_input }})
+text(word_in, width/2, height/2)
 
-//	text(String_in, mouseX + id_in, mouseY + id_in);
-//	eval(text({{ all_words.count }}, mouseX + id_in, mouseY + id_in + 15 ));
-eval('text({{' + String_in + '}}, mouseX + id_in, mouseY + id_in + 15 )');
 
- //   text({{ String_in.count }}, mouseX + id_in, mouseY + id_in + 30);
-//    text(obj[0], mouseX + id_in, mouseY + id_in + 30 );
-//    x = eval("{{" + String_in + "}}")
-//	text(eval('{{' + String_in + '}}'), mouseX + id_in, mouseY + id_in + 45 );
-
-//	text(obj2[0], mouseX + id_in, mouseY + id_in + 45 );
-//	text(dat[1].fields.user_input, mouseY + id_i + 60)
-//
 }
 
 
