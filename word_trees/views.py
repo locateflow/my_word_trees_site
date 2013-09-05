@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.template import Context, loader
 
 from django.core import serializers
+import random
+import math
 
 def index(request):
     list = Sentence.objects.order_by('user_input')[:5]
@@ -40,6 +42,9 @@ def detail(request, word_id):
     template = loader.get_template('word_trees/detail.html')
     firstWord = Word.objects.get(pk=3)
     tree = assembleTree(firstWord, [])
+    randoms=[]    
+    for i in range (len(tree)):    
+        randoms.append(random.random()*2*math.pi)
     
     context = Context({
         'this_word': this_word,
@@ -48,6 +53,7 @@ def detail(request, word_id):
         'dict' : dict,
         'data' : data,
         'tree' : tree,
+        'randoms' : randoms,
         })
     return HttpResponse("this is sentence number %s." % word_id + template.render(context))
 
